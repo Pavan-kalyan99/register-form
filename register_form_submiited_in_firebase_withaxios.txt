@@ -1,0 +1,60 @@
+import React from 'react'
+import { useState,useEffect } from 'react'
+import axios from 'axios';
+const Contact = () => {
+  const [data,setData]=useState({
+    username:'',
+    email:'',
+    password:'',
+  });
+  const {username,email,password}= data;
+
+
+  const onchangeHand=e=>{
+    setData({...data,[e.target.name]:[e.target.value]})
+
+  }
+  const submitHand=e=>{
+    e.preventDefault();
+    // console.log(data);
+    // alert("submitted");
+    axios.post('https://pavan-f55fc-default-rtdb.firebaseio.com/register.json',data)
+    .then(()=>alert("submitted"))
+  }
+
+  return (
+    <div>
+      <h3>Register form</h3>
+      <p>hii pk </p>
+    <div className='Reg-form'>
+       <center>
+        <form onSubmit={submitHand}>     
+          <div><label>User Name:</label>
+          <input  type="text" onChange={onchangeHand} name="username" value={username}  placeholder='enter Name'/>
+          </div>
+       
+          <div>   <label>email id:</label>
+          <input type="email" onChange={onchangeHand} name="email" value={email}  placeholder='enter email'/>
+          </div>
+          <div>   <label>password:</label>
+          <input type="password" onChange={onchangeHand} name="password" value={password}  placeholder='enter email'/>
+          </div>
+          <input type="submit"/>
+        </form>
+        </center>
+        
+
+        </div>
+    
+    </div>
+
+  )
+}
+
+export default Contact
+  {/* <div className='bgimg2'></div>
+      <div className='Contact' > <h5>Contact Us</h5>
+        <div className='text'><p>address:1-2,tambatam,Chennai,TN</p></div>
+        <div className='text'><p>Phone No:342243132</p></div>
+        <div className='text'><p>Email:abc@hmail.com</p></div>
+        </div> */}
